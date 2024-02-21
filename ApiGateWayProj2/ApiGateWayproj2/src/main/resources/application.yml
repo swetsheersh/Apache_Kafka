@@ -1,0 +1,31 @@
+#port no.
+server:
+  port: 8080
+  
+#in case of ip change ,it will help in detect eureka server
+eureka:
+  instance:
+    hostname: localhost
+
+#GateWay Configuration
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      mvc:
+        routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+          - Path=/user/**
+          
+        - id: DELIVERYBOY-SERVICE
+          uri: lb://DELIVERYBOY-SERVICE
+          predicates:
+          - Path=/contact/**
+        
+
+  
+   
+    
